@@ -458,3 +458,12 @@ The test suite verifies:
 * Dead Letter Queue
 * Invalid JSON handling
 * End-to-end CLI workflow
+
+```
+
+## 👨‍💻 Author
+
+**Akshaya Kumar**
+
+- GitHub: https://github.com/akshayakumar2020
+- LinkedIn: https://www.linkedin.com/akshayakumar2020
