@@ -459,7 +459,7 @@ The test suite verifies:
 * Invalid JSON handling
 * End-to-end CLI workflow
 
-```
+---
 
 ## 👨‍💻 Author
 
