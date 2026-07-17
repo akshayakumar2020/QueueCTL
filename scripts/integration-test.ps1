@@ -14,15 +14,15 @@ New-Item -ItemType Directory -Force .\data | Out-Null
 {"id":"e2e-dead","command":"cmd /c exit 1","max_retries":2}
 '@ | Set-Content -Path .\data\e2e-dead.json
 
-java -jar target/queuectl.jar config set backoff-base 1
-java -jar target/queuectl.jar enqueue '@data/e2e-ok.json'
-java -jar target/queuectl.jar enqueue '@data/e2e-dead.json'
-java -jar target/queuectl.jar worker start --count 2
+.\bin\queuectl.ps1 config set backoff-base 1
+.\bin\queuectl.ps1 enqueue '@data/e2e-ok.json'
+.\bin\queuectl.ps1 enqueue '@data/e2e-dead.json'
+.\bin\queuectl.ps1 worker start --count 2
 Start-Sleep -Seconds 5
-java -jar target/queuectl.jar worker stop
+.\bin\queuectl.ps1 worker stop
 
-$listOutput = java -jar target/queuectl.jar list
-$dlqOutput = java -jar target/queuectl.jar dlq list
+$listOutput = .\bin\queuectl.ps1 list
+$dlqOutput = .\bin\queuectl.ps1 dlq list
 $listText = $listOutput -join "`n"
 $dlqText = $dlqOutput -join "`n"
 

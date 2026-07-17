@@ -9,12 +9,20 @@ mvn clean package
 bin/queuectl --help
 ```
 
-On Windows without Bash:
+On Windows:
 
 ```powershell
 mvn clean package
-java -jar target/queuectl.jar --help
+.\bin\queuectl.ps1 --help
 ```
+
+If PowerShell script execution is restricted, use the Command Prompt launcher:
+
+```powershell
+.\bin\queuectl.cmd --help
+```
+
+You can always run the jar directly with `java -jar target/queuectl.jar --help`.
 
 The SQLite database is created at `data/queuectl.db`.
 
@@ -29,7 +37,7 @@ bin/queuectl enqueue '{"id":"job1","command":"echo hello"}'
 For shell-neutral automation, write JSON to a file and pass `@file`:
 
 ```powershell
-java -jar target/queuectl.jar enqueue '@data/job1.json'
+.\bin\queuectl.ps1 enqueue '@data/job1.json'
 enqueued job1
 ```
 
@@ -45,14 +53,14 @@ job2  pending  0         2026-07-15T18:36:44.625431100Z  cmd /c exit 1
 Configure retries/backoff:
 
 ```text
-java -jar target/queuectl.jar config set backoff-base 1
+.\bin\queuectl.ps1 config set backoff-base 1
 set backoff-base=1
 ```
 
 Start workers:
 
 ```text
-java -jar target/queuectl.jar worker start --count 2
+.\bin\queuectl.ps1 worker start --count 2
 starting..
 started workers: worker-d27e72e1, worker-0cc5e57f
 ```
@@ -69,12 +77,12 @@ job2  dead       2         2026-07-15T18:37:07.609849400Z  cmd /c exit 1
 DLQ:
 
 ```text
-java -jar target/queuectl.jar dlq list
+.\bin\queuectl.ps1 dlq list
 ID    ATTEMPTS  ERROR     COMMAND
 ----  --------  --------  -------------
 job2  2         exit 1:   cmd /c exit 1
 
-java -jar target/queuectl.jar dlq retry job2
+.\bin\queuectl.ps1 dlq retry job2
 requeued job2
 ```
 
@@ -95,7 +103,7 @@ active workers: 2
 Stop workers:
 
 ```text
-java -jar target/queuectl.jar worker stop
+.\bin\queuectl.ps1 worker stop
 signaled workers: 2
 ```
 
@@ -147,4 +155,10 @@ Run the end-to-end shell test:
 bash scripts/integration-test.sh
 ```
 
-The JUnit suite verifies job insert/read, concurrent atomic claim, malformed JSON handling, command execution success/failure, and retry-to-DLQ behavior. The shell script builds the jar, enqueues jobs through the CLI, starts real worker JVMs, verifies completion and DLQ behavior, and stops workers.
+Run the Windows PowerShell end-to-end test:
+
+```powershell
+.\scripts\integration-test.ps1
+```
+
+The JUnit suite verifies job insert/read, concurrent atomic claim, malformed JSON handling, command execution success/failure, and retry-to-DLQ behavior. The shell and PowerShell scripts build the jar, enqueue jobs through the CLI, start real worker JVMs, verify completion and DLQ behavior, and stop workers.
