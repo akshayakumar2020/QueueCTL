@@ -465,5 +465,5 @@ The test suite verifies:
 
 **Akshaya Kumar**
 
-- **GitHub:** https://github.com/akshayakumar2020
-- **LinkedIn:** https://www.linkedin.com/in/akshayakumar2020/
+- GitHub: [akshayakumar2020](https://github.com/akshayakumar2020)
+- LinkedIn: [Akshaya Kumar](https://www.linkedin.com/in/your-linkedin-profile/)
